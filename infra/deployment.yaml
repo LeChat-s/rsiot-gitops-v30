@@ -9,7 +9,7 @@ metadata:
     org.bstu.variant: "30"
     org.bstu.slug: "230203-v30"
 spec:
-  replicas: 3
+  replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
