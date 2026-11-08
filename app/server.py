@@ -5,7 +5,7 @@ import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 PORT = int(os.getenv("PORT", "8110"))
-RELEASE_MESSAGE = "rules v1"
+RELEASE_MESSAGE = "rules v2"
 APP_VERSION = os.getenv("APP_VERSION", "dev")
 
 

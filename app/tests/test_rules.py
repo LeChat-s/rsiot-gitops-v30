@@ -4,7 +4,7 @@ from server import evaluate_rules, RELEASE_MESSAGE
 
 class RulesTests(unittest.TestCase):
     def test_version_message(self):
-        self.assertEqual(RELEASE_MESSAGE, "rules v1")
+        self.assertEqual(RELEASE_MESSAGE, "rules v2")
 
     def test_ambient_conditions(self):
         self.assertEqual(evaluate_rules({"temperature": 22, "humidity": 45, "motion": False})["actions"], [])
