@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app
+  namespace: demo
+  labels:
+    app: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+        - name: echo
+          image: hashicorp/http-echo:1.0
+          args: ["-listen=:9090", "-text=demo v1"]
+          ports:
+            - containerPort: 9090

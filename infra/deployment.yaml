@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rules
+  namespace: gitops30
+  labels:
+    app: rules
+    org.bstu.course: "RSIOT"
+    org.bstu.variant: "30"
+    org.bstu.slug: "230203-v30"
+spec:
+  replicas: 3
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: rules
+  template:
+    metadata:
+      labels:
+        app: rules
+        org.bstu.course: "RSIOT"
+        org.bstu.variant: "30"
+        org.bstu.slug: "230203-v30"
+    spec:
+      containers:
+        - name: rules
+          # Bootstrap tag will be replaced automatically by the first CI run.
+          image: ghcr.io/lechat-s/rules:bootstrap
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8110
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 2
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: http
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          resources:
+            requests:
+              cpu: 25m
+              memory: 32Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            runAsUser: 10001
+            capabilities:
+              drop: [ALL]

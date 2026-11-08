@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rules-v30
+  namespace: argocd
+  labels:
+    org.bstu.course: "RSIOT"
+    org.bstu.variant: "30"
+    org.bstu.slug: "230203-v30"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/LeChat-s/rsiot-gitops-v30.git
+    targetRevision: main
+    path: infra
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: gitops30
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m
