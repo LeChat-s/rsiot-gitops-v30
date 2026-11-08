@@ -25,7 +25,7 @@ spec:
       containers:
         - name: rules
           # Bootstrap tag will be replaced automatically by the first CI run.
-          image: ghcr.io/lechat-s/rules:bootstrap
+          image: ghcr.io/lechat-s/rules:0f0e61182bfbea58d02f48137082faa02f825fb8
           imagePullPolicy: Always
           ports:
             - name: http
